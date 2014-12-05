@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 58cda47ea1191e7448e6c762a5b2cd69
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - preview: {instanceID: 0}
+  - imgDefault: {fileID: 21300000, guid: 594e33e139763a14197f17540c2f2b57, type: 3}
+  - imgLog: {fileID: 21300000, guid: 6486a3e748a736443995237c162c54bc, type: 3}
+  - imgBranch: {fileID: 21300000, guid: 310a279026121a14d8e052ddfd9820fa, type: 3}
+  - imgTwig: {fileID: 21300000, guid: c19b10281d421da4a98bb5daccd6e5fd, type: 3}
+  - imgFlint: {fileID: 21300000, guid: 1ab3a01116d27664b919641bc7a97159, type: 3}
+  - imgRock: {fileID: 21300000, guid: c13e68fac5d3f704ab34fb43c46a5086, type: 3}
+  - imgMushroom: {fileID: 21300000, guid: 5afbfaae0cb83f942a699783d1e08b06, type: 3}
+  - imgOnion: {fileID: 21300000, guid: 9f702f0b885579a4499edb3e6ca09690, type: 3}
+  - imgMeat: {fileID: 21300000, guid: 4f836caf1c4f109469f49629e11b3b06, type: 3}
+  - imgHide: {fileID: 21300000, guid: 918eb3b65a814454d8f4dbae861d433b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
