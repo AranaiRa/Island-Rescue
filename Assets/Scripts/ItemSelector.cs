@@ -100,7 +100,6 @@ public class ItemSelector : MonoBehaviour {
 		}
 
 		tTicker = transitionTime;
-		Debug.Log ("index=" + index);
 	}
 
 	public int GetIndex(){

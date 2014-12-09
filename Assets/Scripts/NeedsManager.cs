@@ -22,7 +22,10 @@ public class NeedsManager : MonoBehaviour {
 
 		GaugeDecay (hunger, hungerDecay);
 		GaugeDecay (thirst, thirstDecay);
-		GaugeDecay (warmth, warmthDecay);
+		if(Config.inventory.InstancesOf(GameItem.Hide) > 0)
+			GaugeDecay (warmth, warmthDecay / 2);
+		else
+			GaugeDecay (warmth, warmthDecay);
 
 		GaugeBlink (hunger);
 		GaugeBlink (thirst);

@@ -43,8 +43,6 @@ public class InventoryManager : MonoBehaviour {
 			UpdateItemSlots ();
 			inputTicker = inputDelay;
 		}
-		if (Input.GetKeyDown (Config.Drop))
-			Drop ();
 	}
 
 	public bool PickUp(GameItem gi){
@@ -64,8 +62,8 @@ public class InventoryManager : MonoBehaviour {
 	}
 
 	public void Drop(){
-		Debug.Log ("dropping slot " + selector.GetIndex ());
-		if (itemsHeld [selector.GetIndex ()] != GameItem.NONE) {
+		GameItem gi = itemsHeld [selector.GetIndex ()];
+		if (gi != GameItem.NONE) {
 			SetItemSlot(selector.GetIndex(), GameItem.NONE);
 			//TODO: Render dropped item
 		}

@@ -1,13 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\InventoryManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ConstructionSite.cs">
     <Files>
-      <File FileName="Assets\Scripts\InventoryManager.cs" Line="192" Column="21" />
+      <File FileName="Assets\Scripts\NeedsManager.cs" Line="26" Column="39" />
+      <File FileName="Assets\Scripts\InventoryManager.cs" Line="45" Column="4" />
       <File FileName="Assets\Scripts\Collectable.cs" Line="16" Column="26" />
       <File FileName="Assets\Scripts\Stockpile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CraftPreview.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\InventoryManager.cs" Line="204" Column="1" />
       <File FileName="Assets\Scripts\RaycastLookAt.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TimeManager.cs" Line="37" Column="20" />
+      <File FileName="Assets\Scripts\Collector.cs" Line="22" Column="36" />
+      <File FileName="Assets\Scripts\ResourceManager.cs" Line="8" Column="41" />
+      <File FileName="Assets\Scripts\ConstructionSite.cs" Line="22" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

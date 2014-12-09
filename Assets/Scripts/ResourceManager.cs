@@ -7,10 +7,11 @@ public class ResourceManager : MonoBehaviour {
 	List<ResourceNode> nodes = new List<ResourceNode>();
 	public GameObject[] CollectablePrefabs;
 	public float[] CollectableWeights;
+	public string Tag = "ResourceNode";
 
 	// Use this for initialization
 	void Start () {
-		GameObject[] go = GameObject.FindGameObjectsWithTag ("ResourceNode");
+		GameObject[] go = GameObject.FindGameObjectsWithTag (Tag);
 		for(int i=0;i<go.Length;i++){
 			nodes.Add(go[i].GetComponent<ResourceNode>());
 		}

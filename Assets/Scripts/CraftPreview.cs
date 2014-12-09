@@ -41,13 +41,11 @@ public class CraftPreview : MonoBehaviour {
 	}
 
 	public void SetImage(Sprite s){
-		Debug.Log ("is imgsub a thing? " + (imgSub != null));
 		imgSub.sprite = s;
 		img.gameObject.SetActive (true);
 	}
 
 	public void Disable(){
-		Debug.Log ("is img a thing? " + (imgSub != null));
 		img.gameObject.SetActive (false);
 	}
 }
