@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\ItemSelector.cs" />
      <Compile Include="Assets\Scripts\LightFlicker.cs" />
      <Compile Include="Assets\Scripts\NeedsManager.cs" />
+     <Compile Include="Assets\Scripts\Pathfinder.cs" />
      <Compile Include="Assets\Scripts\PathingNode.cs" />
      <Compile Include="Assets\Scripts\RaycastLookAt.cs" />
      <Compile Include="Assets\Scripts\ResourceManager.cs" />

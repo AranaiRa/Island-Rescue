@@ -17,7 +17,6 @@ public class ResourceNode : MonoBehaviour {
 	}
 
 	public void Activate() {
-		Debug.Log ("activate call; "+(Pickup != null));
 		if(Pickup != null){
 			Instantiate(Pickup, transform.position, transform.rotation);
 		}
