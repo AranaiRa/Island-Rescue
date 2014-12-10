@@ -4,7 +4,7 @@ using System.Collections;
 public enum GameItem{
 	NONE, 
 	Log, Branch, Twig, Flint, Rock, Mushroom, Onion, Meat, MeatCooked, Hide,
-	Knife, Hatchet, Radio
+	Knife, Hatchet, Radio, Trap
 }
 public static class GameItemStrings{
 	public static string Get(GameItem gi){
@@ -49,6 +49,9 @@ public static class GameItemStrings{
 			break;
 		case GameItem.Radio:
 			s = "Radio";
+			break;
+		case GameItem.Trap:
+			s = "Trap";
 			break;
 		default:
 			s = "<UNDEFINED>";

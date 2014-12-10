@@ -174,11 +174,18 @@ public class InventoryManager : MonoBehaviour {
 
 			else if(InstancesOf(GameItem.Branch) == 1){
 				recipe = GameItem.Twig;
-				num = 3;
+				num = 4;
 			}
-
+			
 			else if(InstancesOf (GameItem.Meat) == 1 && isNearFire){
 				recipe = GameItem.MeatCooked;
+				num = 1;
+			}
+			
+			else if(InstancesOf (GameItem.Log) == 1 && 
+			        InstancesOf (GameItem.Branch) == 3 &&
+			        InstancesOf (GameItem.Mushroom) == 1){
+				recipe = GameItem.Trap;
 				num = 1;
 			}
 		}
