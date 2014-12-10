@@ -10,4 +10,13 @@ public static class Config {
 		Use = KeyCode.E,
 		Deposit = KeyCode.Tab;
 	public static InventoryManager inventory;
+	public static NeedsManager needs;
+	public static Collector collector;
+	public static bool hasTent = false;
+	public static int numDaysSurvived = -1;
+
+	public static void ResetInstanceInformation(){
+		hasTent = false;
+		numDaysSurvived = -1;
+	}
 }

@@ -14,7 +14,7 @@ public class NeedsManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		Config.needs = this;
 	}
 	
 	// Update is called once per frame
@@ -22,10 +22,17 @@ public class NeedsManager : MonoBehaviour {
 
 		GaugeDecay (hunger, hungerDecay);
 		GaugeDecay (thirst, thirstDecay);
-		if(Config.inventory.InstancesOf(GameItem.Hide) > 0)
-			GaugeDecay (warmth, warmthDecay / 2);
-		else
-			GaugeDecay (warmth, warmthDecay);
+		
+		int numHides = Config.inventory.InstancesOf (GameItem.Hide);
+		if (Config.inventory.GetNearFire()) {
+			warmth.value += Time.deltaTime * (0.08f + (0.5f * numHides));
+		}
+		else {
+			if(numHides > 0)
+				GaugeDecay (warmth, warmthDecay / 2);
+			else
+				GaugeDecay (warmth, warmthDecay);
+		}
 
 		GaugeBlink (hunger);
 		GaugeBlink (thirst);
@@ -36,8 +43,9 @@ public class NeedsManager : MonoBehaviour {
 		float f;
 		
 		f = s.value;
-		f -= Time.deltaTime * (decay / 60);
+		f -= Time.deltaTime / decay;
 		if(f < 0) f = 0;
+		if(f > 1) f = 1;
 		
 		s.value = f;
 	}
@@ -63,5 +71,7 @@ public class NeedsManager : MonoBehaviour {
 			else
 				s.transform.parent.GetComponent<Image>().color = containerDefaultColor;
 		}
+		else
+			s.transform.parent.GetComponent<Image>().color = containerDefaultColor;
 	}
 }

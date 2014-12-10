@@ -10,7 +10,8 @@ public class InventoryManager : MonoBehaviour {
 	public Sprite 
 		imgDefault, imgLog, imgBranch, imgTwig, imgFlint, 
 		imgRock, imgMushroom, imgOnion, imgMeat, imgMeatCooked, 
-		imgHide;
+		imgHide, imgRadio;
+	bool isNearFire = false;
 	GameItem[] itemsHeld = new GameItem[9];
 	GameItem recipeItem;
 	int recipeNum;
@@ -25,6 +26,7 @@ public class InventoryManager : MonoBehaviour {
 		}
 
 		Config.inventory = this;
+		PickUp (GameItem.Radio);
 	}
 	
 	// Update is called once per frame
@@ -42,6 +44,30 @@ public class InventoryManager : MonoBehaviour {
 			}
 			UpdateItemSlots ();
 			inputTicker = inputDelay;
+		}
+
+		GameItem held = GetHeldObject ();
+		if (Input.GetKeyDown (Config.Use) && held != GameItem.NONE) {
+			if(held == GameItem.Onion && Config.needs.hunger.value < 0.85f){
+				Config.needs.hunger.value += 0.15f;
+				Config.needs.thirst.value += 0.15f;
+				SetItemSlot (selector.GetIndex(), GameItem.NONE, true);
+			}
+			else if(held == GameItem.Mushroom && Config.needs.hunger.value < 0.88f){
+				Config.needs.hunger.value += 0.18f;
+				itemsHeld[selector.GetIndex()] = GameItem.NONE;
+				SetItemSlot (selector.GetIndex(), GameItem.NONE, true);
+			}
+			else if(held == GameItem.Meat && Config.needs.hunger.value < 0.68f){
+				Config.needs.hunger.value += 0.32f;
+				itemsHeld[selector.GetIndex()] = GameItem.NONE;
+				SetItemSlot (selector.GetIndex(), GameItem.NONE, true);
+			}
+			else if(held == GameItem.MeatCooked && Config.needs.hunger.value < 0.75f){
+				Config.needs.hunger.value += 0.50f;
+				itemsHeld[selector.GetIndex()] = GameItem.NONE;
+				SetItemSlot (selector.GetIndex(), GameItem.NONE, true);
+			}
 		}
 	}
 
@@ -65,7 +91,6 @@ public class InventoryManager : MonoBehaviour {
 		GameItem gi = itemsHeld [selector.GetIndex ()];
 		if (gi != GameItem.NONE) {
 			SetItemSlot(selector.GetIndex(), GameItem.NONE);
-			//TODO: Render dropped item
 		}
 	}
 	
@@ -127,6 +152,15 @@ public class InventoryManager : MonoBehaviour {
 		itemSlots [index].gameObject.SetActive (false);
 	}
 
+	public void SetNearFire(bool b){
+		isNearFire = b;
+		CheckRecipe ();
+	}
+
+	public bool GetNearFire(){
+		return isNearFire;
+	}
+
 	void CheckRecipe(){
 		GameItem recipe = GameItem.NONE;
 		int num = 0;
@@ -141,6 +175,11 @@ public class InventoryManager : MonoBehaviour {
 			else if(InstancesOf(GameItem.Branch) == 1){
 				recipe = GameItem.Twig;
 				num = 3;
+			}
+
+			else if(InstancesOf (GameItem.Meat) == 1 && isNearFire){
+				recipe = GameItem.MeatCooked;
+				num = 1;
 			}
 		}
 
@@ -191,6 +230,9 @@ public class InventoryManager : MonoBehaviour {
 			break;
 		case GameItem.Hide:
 			s = imgHide;
+			break;
+		case GameItem.Radio:
+			s = imgRadio;
 			break;
 		default:
 			s = imgDefault;

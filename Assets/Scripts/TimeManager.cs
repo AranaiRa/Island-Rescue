@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TimeManager : MonoBehaviour {
 
+	public GameObject player;
+	public GameObject camp;
+	public NeedsManager needs;
 	public float 
 		dayLength,
 		currentTime;
@@ -28,6 +31,9 @@ public class TimeManager : MonoBehaviour {
 	void Start () {
 		light = GetComponent<Light> ();
 		NewDay ();
+		needs.hunger.value = 1f;
+		needs.thirst.value = 1f;
+		needs.warmth.value = 1f;
 	}
 	
 	// Update is called once per frame
@@ -74,5 +80,29 @@ public class TimeManager : MonoBehaviour {
 		dayStart = Time.time;
 		dayEnd = dayStart + dayLength;
 		light.gameObject.transform.rotation = Quaternion.Euler (sunrise);
+		if (Config.hasTent) {
+			player.transform.position = camp.transform.position;
+			needs.hunger.value -= 0.25f;
+			if(needs.hunger.value < 0.1f) needs.hunger.value = 0.1f;
+
+			needs.thirst.value -= 0.25f;
+			if(needs.thirst.value < 0.1f) needs.thirst.value = 0.1f;
+			
+			needs.warmth.value -= 0.25f / Config.inventory.InstancesOf(GameItem.Hide);
+			if(needs.warmth.value < 0.1f) needs.warmth.value = 0.1f;
+		}
+		else{
+			needs.hunger.value -= 0.45f;
+			if(needs.hunger.value < 0.1f) needs.hunger.value = 0.1f;
+			
+			needs.thirst.value -= 0.45f;
+			if(needs.thirst.value < 0.1f) needs.thirst.value = 0.1f;
+			
+			needs.warmth.value -= 0.60f / Config.inventory.InstancesOf(GameItem.Hide);
+			if(needs.warmth.value < 0.1f) needs.warmth.value = 0.1f;
+		}
+		Config.numDaysSurvived++;
+		if (Config.numDaysSurvived >= 3)
+						Debug.Log ("win get"); //TODO: Gamestate change to win
 	}
 }

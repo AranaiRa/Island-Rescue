@@ -12,6 +12,7 @@ public class Collector : MonoBehaviour {
 	void Start () {
 		layermask = 1 << 2;
 		layermask = ~layermask;
+		Config.collector = this;
 	}
 	
 	// Update is called once per frame
@@ -33,16 +34,18 @@ public class Collector : MonoBehaviour {
 			}
 		}
 		if (Input.GetKeyDown (Config.Drop) && (activeItem != GameItem.NONE)) {
+			RenderDroppedItem(activeItem);
+			Config.inventory.Drop();
+		}
+	}
 
-			Vector3 pos = transform.position + (transform.forward * 1.5f);
-			string target = "Collectable - "+GameItemStrings.Get(activeItem);
-			GameObject go = (GameObject)Instantiate(Resources.Load (target, typeof(GameObject)), pos, transform.rotation);
-			if(activeItem != GameItem.Log && activeItem != GameItem.Branch){
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().angularDrag = 15f;
-			}
-
-			inventory.Drop();
+	public void RenderDroppedItem(GameItem gi) {
+		Vector3 pos = transform.position + (transform.forward * 1.5f);
+		string target = "Collectable - "+GameItemStrings.Get(gi);
+		GameObject go = (GameObject)Instantiate(Resources.Load (target, typeof(GameObject)), pos, transform.rotation);
+		if(gi != GameItem.Log && gi != GameItem.Branch){
+			go.AddComponent<Rigidbody>();
+			go.GetComponent<Rigidbody>().angularDrag = 15f;
 		}
 	}
 }

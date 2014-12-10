@@ -12,7 +12,7 @@ public class Stockpile : MonoBehaviour {
 	public GameObject messageWindow;
 
 	private float
-		addMatCD = 1.5f, 
+		addMatCD = 0.5f, 
 		addMatTicker;
 	private bool isInZone = false;
 
@@ -73,7 +73,7 @@ public class Stockpile : MonoBehaviour {
 		UpdateText();
 	}
 
-	bool RemoveItemFromPile(){
+	public bool RemoveItemFromPile(){
 		bool op = false;
 		if (numItems > 0) {
 			numItems --;
@@ -81,7 +81,7 @@ public class Stockpile : MonoBehaviour {
 			if(numItems <= visualThresholds[visualThresholds.Length-1])
 			for(int i=0;i<visualThresholds.Length;i++){
 				if(visualThresholds[i]==numItems){
-					visualObjects[i].SetActive(true);
+					visualObjects[i].SetActive(false);
 					break;
 				}
 			}
@@ -91,6 +91,10 @@ public class Stockpile : MonoBehaviour {
 			op = true;
 		}
 		return op;
+	}
+
+	public int GetNumItems(){
+		return numItems;
 	}
 	
 	void UpdateText() {
@@ -102,7 +106,8 @@ public class Stockpile : MonoBehaviour {
 			
 			s += "</size></b>\nPress <i>TAB</i> to deposit.";
 			
-			messageWindow.GetComponentInChildren<Text>().text = s;
+			Text t = messageWindow.transform.GetChild (0).GetComponent<Text> ();
+			t.text = s;
 		}
 	}
 }
