@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class controls the boar entities.
+/// </summary>
 public class Boar : MonoBehaviour {
 
 	public bool canMove = true;
@@ -9,6 +12,7 @@ public class Boar : MonoBehaviour {
 	public float maxRotationY = 90f;
 	public float walkSpeed = 16f;
 
+	//Pathfinding info
 	public PathingNode 
 		start,
 		prev,
@@ -43,6 +47,9 @@ public class Boar : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Stops the boar from moving and animating, sets it on its side.
+	/// </summary>
 	public void StopMoving(){
 		canMove = false;
 		animator.SetBool ("canMove", false);
@@ -54,19 +61,17 @@ public class Boar : MonoBehaviour {
 		this.transform.position = position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if(canMove && !Config.Paused){
+			//Movement
 			Vector3 move = heading * walkSpeed * Time.deltaTime;
 			CalcSpeedY ();
 			collisionFlags = controller.Move(new Vector3(move.x,speedY,move.z) * Time.deltaTime * walkSpeed);
 
 			distLast = distThis;
-			/*distThis = Vector2.Distance (
-				new Vector2(transform.position.x, transform.position.z), 
-				new Vector2(next.transform.position.x, next.transform.position.z));*/
 			distThis = Vector3.Distance(transform.position, next.transform.position);
 
+			//If the boar is within the cutoff distance or is moving away from the target, select a new node.
 			if ((distThis < distCutoff) || (distLast < distThis)) {
 				distThis = float.MaxValue;
 				PathingNode sel = next.SelectNode(prev);
@@ -78,11 +83,17 @@ public class Boar : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Re-orients the boar to face its next pathfinding node.
+	/// </summary>
 	void FixRotation(){
 		Vector3 diff = next.transform.position - prev.transform.position;
 		transform.rotation = Quaternion.LookRotation(diff.normalized);
 	}
-	
+
+	/// <summary>
+	/// Calculates gravity.
+	/// </summary>
 	void CalcSpeedY(){
 		if(IsGrounded()){
 			speedY = 0;
@@ -90,18 +101,29 @@ public class Boar : MonoBehaviour {
 			speedY -= gravity * Time.deltaTime;
 		}
 	}
-	
+
+	/// <summary>
+	/// Determines whether this instance is grounded.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is grounded; otherwise, <c>false</c>.</returns>
 	bool IsGrounded(){
 		return ((collisionFlags & CollisionFlags.CollidedBelow) > 0); // really if it's 1
 	}
 
+	/// <summary>
+	/// Raises the trigger enter event.
+	/// </summary>
+	/// <param name="other">Other.</param>
 	void OnTriggerEnter(Collider other){
 		if(other.gameObject.GetComponent<Collectable>() != null){
 			if(other.gameObject.GetComponent<Collectable>().type == GameItem.Trap)
 				StopMoving();
 		}
 	}
-	
+
+	/// <summary>
+	/// Calculates the direction the boar is going to start moving in next.
+	/// </summary>
 	void CalculateHeading(){
 		Vector3 dir = next.transform.position - prev.transform.position;
 		heading = dir.normalized;

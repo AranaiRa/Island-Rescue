@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// This class manages the player's inventory.
+/// </summary>
 public class InventoryManager : MonoBehaviour {
 
 	public CraftPreview preview; 
@@ -26,14 +29,17 @@ public class InventoryManager : MonoBehaviour {
 		}
 
 		Config.inventory = this;
+		//Make sure the player starts with their radio.
 		PickUp (GameItem.Radio);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//Make sure input isn't registered too frequently.
 		inputTicker -= Time.deltaTime;
 		if(inputTicker < 0) inputTicker = 0;
 
+		//Handle craft input
 		if (Input.GetKeyDown (Config.Craft) && inputTicker <= 0) {
 			if(recipeItem != GameItem.NONE){
 				itemsHeld = new GameItem[9];
@@ -46,6 +52,7 @@ public class InventoryManager : MonoBehaviour {
 			inputTicker = inputDelay;
 		}
 
+		//Handle food eating
 		GameItem held = GetHeldObject ();
 		if (Input.GetKeyDown (Config.Use) && held != GameItem.NONE) {
 			if(held == GameItem.Onion && Config.needs.hunger.value < 0.85f){
@@ -71,6 +78,11 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Add an item to the player's inventory
+	/// </summary>
+	/// <returns><c>true</c>, if the function was successful, <c>false</c> otherwise.</returns>
+	/// <param name="gi">the gameitem.</param>
 	public bool PickUp(GameItem gi){
 		bool changed = false;
 		if(gi != GameItem.NONE){
@@ -87,13 +99,20 @@ public class InventoryManager : MonoBehaviour {
 		else return false;
 	}
 
+	/// <summary>
+	/// Remove item from the player's inventory. Drawing the item is handled in Collector; do drops there.
+	/// </summary>
 	public void Drop(){
 		GameItem gi = itemsHeld [selector.GetIndex ()];
 		if (gi != GameItem.NONE) {
 			SetItemSlot(selector.GetIndex(), GameItem.NONE);
 		}
 	}
-	
+
+	/// <summary>
+	/// Removes the first item of the input type.
+	/// </summary>
+	/// <param name="gi">the type to check.</param>
 	public void RemoveFirstInstanceOf(GameItem gi){
 		if (gi != GameItem.NONE) {
 			for(int i=0;i<9;i++){
@@ -105,6 +124,11 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// The number of the requested item held in the player's inventory.
+	/// </summary>
+	/// <returns>The number of items.</returns>
+	/// <param name="gi">the gameitem.</param>
 	public int InstancesOf(GameItem gi){
 		int i = 0;
 		foreach (GameItem item in itemsHeld) {
@@ -113,6 +137,10 @@ public class InventoryManager : MonoBehaviour {
 		return i;
 	}
 
+	/// <summary>
+	/// Totals the items held.
+	/// </summary>
+	/// <returns>The total.</returns>
 	public int TotalItemsHeld(){
 		int i = 0;
 		foreach (GameItem item in itemsHeld) {
@@ -121,10 +149,20 @@ public class InventoryManager : MonoBehaviour {
 		return i;
 	}
 
+	/// <summary>
+	/// Gets which item is currently in the main item slot.
+	/// </summary>
+	/// <returns>The held gameitem.</returns>
 	public GameItem GetHeldObject(){
 		return itemsHeld[selector.GetIndex()];
 	}
 
+	/// <summary>
+	/// Sets an item slot to a specific gameitem.
+	/// </summary>
+	/// <param name="index">Which slot.</param>
+	/// <param name="item">Which Gameitem.</param>
+	/// <param name="inform">Whether to inform the recipe checker of the change. Leave false if setting multiple slots in succession, only the last one needs to be true.</param>
 	void SetItemSlot(int index, GameItem item, bool inform = true) {
 		index = Mathf.Clamp (index, 0, 8);
 		Sprite s = GetImageFromGameItem(item);
@@ -141,6 +179,9 @@ public class InventoryManager : MonoBehaviour {
 		if(inform) CheckRecipe ();
 	}
 
+	/// <summary>
+	/// Updates the item slots' visuals and checks to see if anything can be crafted.
+	/// </summary>
 	void UpdateItemSlots(){
 		for (int i=0;i<9;i++) {
 			SetItemSlot(i,itemsHeld[i],false);
@@ -148,19 +189,32 @@ public class InventoryManager : MonoBehaviour {
 		CheckRecipe ();
 	}
 
+	/// <summary>
+	/// Removes an item from the specified slot.
+	/// </summary>
+	/// <param name="index">Index.</param>
 	void ClearItemSlot(int index){
 		itemSlots [index].gameObject.SetActive (false);
 	}
 
+	/// <summary>
+	/// Sets whether the player is considered to be near fire, and checks recipe.
+	/// </summary>
 	public void SetNearFire(bool b){
 		isNearFire = b;
 		CheckRecipe ();
 	}
 
+	/// <summary>
+	/// Checks whether the player is near fire.
+	/// </summary>
 	public bool GetNearFire(){
 		return isNearFire;
 	}
 
+	/// <summary>
+	/// Sets information related to crafting.
+	/// </summary>
 	void CheckRecipe(){
 		GameItem recipe = GameItem.NONE;
 		int num = 0;
@@ -202,10 +256,17 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the active item.
+	/// </summary>
+	/// <returns>The active item.</returns>
 	public GameItem GetActiveItem(){
 		return itemsHeld [selector.GetIndex ()];
 	}
-	
+
+	/// <summary>
+	/// Used to select the proper image file.
+	/// </summary>
 	Sprite GetImageFromGameItem(GameItem gi){
 		Sprite s;
 		switch (gi) {

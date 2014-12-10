@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class controls the passage of time.
+/// </summary>
 public class TimeManager : MonoBehaviour {
 
 	public GameObject player;
@@ -69,6 +72,9 @@ public class TimeManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Convenience method to set the two color interpolation targets.
+	/// </summary>
 	void CheckColors(){
 		for(int i=1;i<interpSteps.Length-1;i++){
 			if(lerp < interpSteps[i]){
@@ -80,10 +86,14 @@ public class TimeManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Controls the logic that happens at the start of a new day.
+	/// </summary>
 	void NewDay(){
 		dayStart = Time.time;
 		dayEnd = dayStart + dayLength;
 		light.gameObject.transform.rotation = Quaternion.Euler (sunrise);
+		//If the player has a tent built, move the player to camp and decay needs less severely.
 		if (Config.hasTent) {
 			player.transform.position = camp.transform.position;
 			needs.hunger.value -= 0.25f;
@@ -105,6 +115,7 @@ public class TimeManager : MonoBehaviour {
 			needs.warmth.value -= 0.60f / Config.inventory.InstancesOf(GameItem.Hide);
 			if(needs.warmth.value < 0.1f) needs.warmth.value = 0.1f;
 		}
+		//If the player has survived three days, win.
 		Config.numDaysSurvived++;
 		if (Config.numDaysSurvived >= 3)
 			GSM.SwitchToWin();

@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// This class controls locations that the player can build specific structures.
+/// </summary>
 public class ConstructionSite : MonoBehaviour {
 
 	public string constructionName;
@@ -43,6 +46,7 @@ public class ConstructionSite : MonoBehaviour {
 					break;
 				}
 			}
+			//If all of the materials are present, proceed.
 			if(hasAllMats){
 				for(int i=0;i<matTypes.Length;i++){
 					GameItem gi = matTypes[i];
@@ -86,6 +90,9 @@ public class ConstructionSite : MonoBehaviour {
 		inBuildArea = false;
 	}
 
+	/// <summary>
+	/// Activate the completed construction, deactivate the trigger and ground indicator.
+	/// </summary>
 	void Construct(){
 		if (constructionName == "a tent")
 						Config.hasTent = true;
@@ -95,6 +102,9 @@ public class ConstructionSite : MonoBehaviour {
 		this.gameObject.SetActive (false);
 	}
 
+	/// <summary>
+	/// Generates a UI message and displays it.
+	/// </summary>
 	void UpdateText(){
 		string s = "<size=18><b>Construction Site</b></size>\n";
 		s += "This looks like a good place to build "+constructionName+".\nLooks like you'll need: ";

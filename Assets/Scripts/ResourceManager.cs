@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class controls spawning of interactable resources.
+/// </summary>
 public class ResourceManager : MonoBehaviour {
 
 	List<ResourceNode> nodes = new List<ResourceNode>();
@@ -17,7 +20,10 @@ public class ResourceManager : MonoBehaviour {
 		}
 		Populate ();
 	}
-	
+
+	/// <summary>
+	/// Fill the various nodes with gameitems associated in the editor.
+	/// </summary>
 	void Populate(){
 		Shuffle ();
 		float totalPercent = 0f;
@@ -42,6 +48,9 @@ public class ResourceManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Randomize the order of items.
+	/// </summary>
 	void Shuffle(){
 		int n = nodes.Count;  
 		while (n > 1) {  

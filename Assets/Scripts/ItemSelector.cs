@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// This class manages the item GUI.
+/// </summary>
 public class ItemSelector : MonoBehaviour {
 	private Vector3[] slots = 
 	{
@@ -31,6 +34,7 @@ public class ItemSelector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Handle slot movement.
 		if (transitioning) {
 			tTicker -= Time.deltaTime;
 			float pd = 1 - (tTicker / transitionTime);
@@ -52,7 +56,8 @@ public class ItemSelector : MonoBehaviour {
 			if(tTicker <= 0)
 				transitioning = false;
 		}
-		else {
+		//Handle input
+		else if(!Config.Paused){
 			if(Input.GetKey(Config.NextItem)){
 				transitioning = true;
 				left = false;
@@ -68,6 +73,9 @@ public class ItemSelector : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Sets the target positions for each item slot.
+	/// </summary>
 	void ShiftItems() {
 
 		RectTransform[] temp = (RectTransform[])panels.Clone();
@@ -102,6 +110,10 @@ public class ItemSelector : MonoBehaviour {
 		tTicker = transitionTime;
 	}
 
+	/// <summary>
+	/// Gets the index of the main item slot.
+	/// </summary>
+	/// <returns>The index.</returns>
 	public int GetIndex(){
 		return index;
 	}

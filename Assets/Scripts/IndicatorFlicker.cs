@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class creates a fade in / fade out effect for camp indicators.
+/// </summary>
 public class IndicatorFlicker : MonoBehaviour {
 
 	public float min = 0.15f;
@@ -16,6 +19,7 @@ public class IndicatorFlicker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Fade in/out effect
 		Color c = mat.GetColor ("_TintColor");
 		if (up) {
 			c.a += rate;

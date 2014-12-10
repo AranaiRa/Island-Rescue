@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class controls nodes for AI pathfinding.
+/// </summary>
 public class PathingNode : MonoBehaviour {
 
 	public PathingNode[] attachedNodes;
@@ -12,6 +15,7 @@ public class PathingNode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lines = GetComponent<LineRenderer> ();
+		//Use a LineRenderer to show path connections if in debug mode.
 		if(DebugShowPaths){
 			for (int i=0; i<attachedNodes.Length; i++) {
 				lines.SetPosition(i+i, attachedNodes[i].transform.position);
@@ -24,6 +28,11 @@ public class PathingNode : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Choose a node attached to this one.
+	/// </summary>
+	/// <returns>The node.</returns>
+	/// <param name="notThisOne">Never selects this node.</param>
 	public PathingNode SelectNode(PathingNode notThisOne){
 		List<PathingNode> nodes = new List<PathingNode> ();
 

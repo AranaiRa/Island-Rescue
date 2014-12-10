@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The  various items that can be picked up throughout the game.
+/// </summary>
 public enum GameItem{
 	NONE, 
 	Log, Branch, Twig, Flint, Rock, Mushroom, Onion, Meat, MeatCooked, Hide,
 	Knife, Hatchet, Radio, Trap
 }
+/// <summary>
+/// A static class with a single method that converts a GameItem object into a string containing its name.
+/// </summary>
 public static class GameItemStrings{
 	public static string Get(GameItem gi){
 		string s = "";
