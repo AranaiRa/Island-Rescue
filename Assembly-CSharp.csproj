@@ -46,6 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EXPORTS\CustomPlayerController\ControllerFirstPerson.cs" />
+     <Compile Include="Assets\EXPORTS\CustomPlayerController\Player.cs" />
+     <Compile Include="Assets\EXPORTS\CustomPlayerController\RainBasin.cs" />
+     <Compile Include="Assets\EXPORTS\Trap\Trap.cs" />
+     <Compile Include="Assets\Scripts\Boar.cs" />
      <Compile Include="Assets\Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\Collector.cs" />
      <Compile Include="Assets\Scripts\Config.cs" />
@@ -54,6 +59,7 @@
      <Compile Include="Assets\Scripts\CraftPreview.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
      <Compile Include="Assets\Scripts\Fireplace.cs" />
+     <Compile Include="Assets\Scripts\GSM.cs" />
      <Compile Include="Assets\Scripts\IndicatorFlicker.cs" />
      <Compile Include="Assets\Scripts\InventoryManager.cs" />
      <Compile Include="Assets\Scripts\ItemSelector.cs" />
@@ -66,6 +72,7 @@
      <Compile Include="Assets\Scripts\ResourceNode.cs" />
      <Compile Include="Assets\Scripts\Stockpile.cs" />
      <Compile Include="Assets\Scripts\TimeManager.cs" />
+     <Compile Include="Assets\Scripts\UIButtonFunctions.cs" />
      <None Include="Assets\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\FX-SimpleWater4.shader" />
      <None Include="Assets\Standard Assets\Water (Pro Only)\Shaders\FX-Water.shader" />
      <None Include="Assets\Standard Assets\Water (Pro Only)\Water4\Sources\Shaders\WaterInclude.cginc" />

@@ -4,6 +4,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - preview: {instanceID: 0}
+  - selector: {instanceID: 0}
   - imgDefault: {fileID: 21300000, guid: 594e33e139763a14197f17540c2f2b57, type: 3}
   - imgLog: {fileID: 21300000, guid: 6486a3e748a736443995237c162c54bc, type: 3}
   - imgBranch: {fileID: 21300000, guid: 310a279026121a14d8e052ddfd9820fa, type: 3}
@@ -13,7 +14,10 @@ MonoImporter:
   - imgMushroom: {fileID: 21300000, guid: 5afbfaae0cb83f942a699783d1e08b06, type: 3}
   - imgOnion: {fileID: 21300000, guid: 9f702f0b885579a4499edb3e6ca09690, type: 3}
   - imgMeat: {fileID: 21300000, guid: 4f836caf1c4f109469f49629e11b3b06, type: 3}
+  - imgMeatCooked: {fileID: 21300000, guid: 2f2f9ca84578fc849b40afc7aa0931df, type: 3}
   - imgHide: {fileID: 21300000, guid: 918eb3b65a814454d8f4dbae861d433b, type: 3}
+  - imgRadio: {fileID: 21300000, guid: 6e5189b2dfb06fb42b1459d4ae9761b2, type: 3}
+  - imgTrap: {fileID: 21300000, guid: fb91688283ffe57408e7109889158adb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

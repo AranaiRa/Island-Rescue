@@ -5,6 +5,8 @@ Project("{576EFC31-B689-32A8-BD19-3959AC5D0F92}") = "Island-Rescue", "Assembly-C
 EndProject
 Project("{576EFC31-B689-32A8-BD19-3959AC5D0F92}") = "Island-Rescue", "Assembly-CSharp-vs.csproj", "{51B686D5-B80A-C298-7D28-37CF5A78F821}"
 EndProject
+Project("{576EFC31-B689-32A8-BD19-3959AC5D0F92}") = "Island-Rescue", "Assembly-CSharp-Editor-vs.csproj", "{DD66CDB7-17C4-6584-170E-D15503A03A14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{51B686D5-B80A-C298-7D28-37CF5A78F821}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51B686D5-B80A-C298-7D28-37CF5A78F821}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51B686D5-B80A-C298-7D28-37CF5A78F821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD66CDB7-17C4-6584-170E-D15503A03A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD66CDB7-17C4-6584-170E-D15503A03A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD66CDB7-17C4-6584-170E-D15503A03A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD66CDB7-17C4-6584-170E-D15503A03A14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(MonoDevelopProperties) = preSolution
+								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

@@ -23,14 +23,25 @@ public class Collector : MonoBehaviour {
 			if(Physics.Raycast(transform.position, transform.forward, out hit, range, layermask)){
 				Collectable c;
 				c = hit.transform.gameObject.GetComponent<Collectable>();
-				Debug.Log ("hit "+hit.transform.gameObject.name);
 				if(c != null){
 					if(inventory.TotalItemsHeld() < 9){
 						inventory.PickUp(c.type);
 						c.Remove();
 					}
 				}
-
+				Boar b;
+				b = hit.transform.gameObject.GetComponent<Boar>();
+				if(b != null){
+					b.gameObject.SetActive(false);
+					RenderDroppedItem(GameItem.Meat);
+					RenderDroppedItem(GameItem.Meat);
+					RenderDroppedItem(GameItem.Meat);
+					RenderDroppedItem(GameItem.Meat);
+					RenderDroppedItem(GameItem.Meat);
+					RenderDroppedItem(GameItem.Hide);
+					RenderDroppedItem(GameItem.Hide);
+					RenderDroppedItem(GameItem.Hide);
+				}
 			}
 		}
 		if (Input.GetKeyDown (Config.Drop) && (activeItem != GameItem.NONE)) {

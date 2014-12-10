@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour {
 	public Sprite 
 		imgDefault, imgLog, imgBranch, imgTwig, imgFlint, 
 		imgRock, imgMushroom, imgOnion, imgMeat, imgMeatCooked, 
-		imgHide, imgRadio;
+		imgHide, imgRadio, imgTrap;
 	bool isNearFire = false;
 	GameItem[] itemsHeld = new GameItem[9];
 	GameItem recipeItem;
@@ -181,10 +181,11 @@ public class InventoryManager : MonoBehaviour {
 				recipe = GameItem.MeatCooked;
 				num = 1;
 			}
-			
-			else if(InstancesOf (GameItem.Log) == 1 && 
-			        InstancesOf (GameItem.Branch) == 3 &&
-			        InstancesOf (GameItem.Mushroom) == 1){
+		}	
+		if (TotalItemsHeld() == 5) {
+			if(InstancesOf (GameItem.Log) == 1 && 
+			    InstancesOf (GameItem.Branch) == 3 &&
+			    InstancesOf (GameItem.Mushroom) == 1){
 				recipe = GameItem.Trap;
 				num = 1;
 			}
@@ -240,6 +241,9 @@ public class InventoryManager : MonoBehaviour {
 			break;
 		case GameItem.Radio:
 			s = imgRadio;
+			break;
+		case GameItem.Trap:
+			s = imgTrap;
 			break;
 		default:
 			s = imgDefault;
