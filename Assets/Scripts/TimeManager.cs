@@ -38,30 +38,34 @@ public class TimeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		lerp = 1 - ((dayEnd - Time.time) / dayLength);
+		if(!Config.Paused){
+			lerp = 1 - ((dayEnd - Time.time) / dayLength);
 
-		if (lerp >= 1f) {
-			NewDay ();
-			//TODO: End of day shit
-		}
-		else {
-			//Direction
-			Vector3 rot;
-			if (lerp <= 0.5f) {
-				rot = Vector3.Lerp(sunrise, noon, lerp*2);
+			if (lerp >= 1f) {
+				NewDay ();
 			}
 			else {
-				rot = Vector3.Lerp(noon, sunset, (lerp-0.5f)*2);
+				//Direction
+				Vector3 rot;
+				if (lerp <= 0.5f) {
+					rot = Vector3.Lerp(sunrise, noon, lerp*2);
+				}
+				else {
+					rot = Vector3.Lerp(noon, sunset, (lerp-0.5f)*2);
+				}
+				light.gameObject.transform.rotation = Quaternion.Euler (rot);
+
+				//Colors & Intensity
+				CheckColors ();
+				float clerp = (lerp - colorTargetLast) / (colorTargetNext - colorTargetLast);
+				light.color = Color.Lerp(interpColor[lastColorIndex], interpColor[lastColorIndex+1], clerp);
+
+
+				light.intensity = Vector2.Lerp(new Vector2(interpIntensity[lastColorIndex], 0), new Vector2(interpIntensity[lastColorIndex+1], 0), clerp).x;
 			}
-			light.gameObject.transform.rotation = Quaternion.Euler (rot);
-
-			//Colors & Intensity
-			CheckColors ();
-			float clerp = (lerp - colorTargetLast) / (colorTargetNext - colorTargetLast);
-			light.color = Color.Lerp(interpColor[lastColorIndex], interpColor[lastColorIndex+1], clerp);
-
-
-			light.intensity = Vector2.Lerp(new Vector2(interpIntensity[lastColorIndex], 0), new Vector2(interpIntensity[lastColorIndex+1], 0), clerp).x;
+		}
+		else{
+			dayEnd += Time.deltaTime;
 		}
 	}
 
@@ -103,6 +107,6 @@ public class TimeManager : MonoBehaviour {
 		}
 		Config.numDaysSurvived++;
 		if (Config.numDaysSurvived >= 3)
-						Debug.Log ("win get"); //TODO: Gamestate change to win
+			GSM.SwitchToWin();
 	}
 }

@@ -32,15 +32,17 @@ public class Collector : MonoBehaviour {
 				Boar b;
 				b = hit.transform.gameObject.GetComponent<Boar>();
 				if(b != null){
-					b.gameObject.SetActive(false);
-					RenderDroppedItem(GameItem.Meat);
-					RenderDroppedItem(GameItem.Meat);
-					RenderDroppedItem(GameItem.Meat);
-					RenderDroppedItem(GameItem.Meat);
-					RenderDroppedItem(GameItem.Meat);
-					RenderDroppedItem(GameItem.Hide);
-					RenderDroppedItem(GameItem.Hide);
-					RenderDroppedItem(GameItem.Hide);
+					if(!b.canMove){
+						b.gameObject.SetActive(false);
+						RenderDroppedItem(GameItem.Meat);
+						RenderDroppedItem(GameItem.Meat);
+						RenderDroppedItem(GameItem.Meat);
+						RenderDroppedItem(GameItem.Meat);
+						RenderDroppedItem(GameItem.Meat);
+						RenderDroppedItem(GameItem.Hide);
+						RenderDroppedItem(GameItem.Hide);
+						RenderDroppedItem(GameItem.Hide);
+					}
 				}
 			}
 		}
@@ -54,7 +56,7 @@ public class Collector : MonoBehaviour {
 		Vector3 pos = transform.position + (transform.forward * 1.5f);
 		string target = "Collectable - "+GameItemStrings.Get(gi);
 		GameObject go = (GameObject)Instantiate(Resources.Load (target, typeof(GameObject)), pos, transform.rotation);
-		if(gi != GameItem.Log && gi != GameItem.Branch){
+		if(gi != GameItem.Log && gi != GameItem.Branch && gi != GameItem.Trap){
 			go.AddComponent<Rigidbody>();
 			go.GetComponent<Rigidbody>().angularDrag = 15f;
 		}

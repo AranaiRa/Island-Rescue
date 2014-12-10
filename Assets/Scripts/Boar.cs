@@ -32,11 +32,15 @@ public class Boar : MonoBehaviour {
 		animator = GetComponent<Animator> ();
 		controller = GetComponent<CharacterController> ();
 
-		transform.position = start.transform.position;
-		next = start.SelectNode (start);
-		prev = start;
-		CalculateHeading ();
-		FixRotation ();
+		if(!canMove) StopMoving();
+		else {
+			transform.position = start.transform.position;
+			next = start.SelectNode (start);
+			prev = start;
+			CalculateHeading ();
+			FixRotation ();
+		}
+
 	}
 
 	public void StopMoving(){
@@ -52,7 +56,7 @@ public class Boar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(canMove){
+		if(canMove && !Config.Paused){
 			Vector3 move = heading * walkSpeed * Time.deltaTime;
 			CalcSpeedY ();
 			collisionFlags = controller.Move(new Vector3(move.x,speedY,move.z) * Time.deltaTime * walkSpeed);
@@ -63,7 +67,6 @@ public class Boar : MonoBehaviour {
 				new Vector2(next.transform.position.x, next.transform.position.z));*/
 			distThis = Vector3.Distance(transform.position, next.transform.position);
 
-			Debug.Log ("distThis:"+distThis+"  distLast:"+distLast);
 			if ((distThis < distCutoff) || (distLast < distThis)) {
 				distThis = float.MaxValue;
 				PathingNode sel = next.SelectNode(prev);

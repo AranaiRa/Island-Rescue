@@ -7,7 +7,7 @@ public class PathingNode : MonoBehaviour {
 	public PathingNode[] attachedNodes;
 	public GameObject disableAtRuntime;
 	LineRenderer lines;
-	static bool DebugShowPaths = true;
+	static bool DebugShowPaths = false;
 
 	// Use this for initialization
 	void Start () {

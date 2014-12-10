@@ -19,24 +19,29 @@ public class NeedsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!Config.Paused){
+			GaugeDecay (hunger, hungerDecay);
+			GaugeDecay (thirst, thirstDecay);
+			
+			int numHides = Config.inventory.InstancesOf (GameItem.Hide);
+			if (Config.inventory.GetNearFire()) {
+				warmth.value += Time.deltaTime * (0.08f + (0.5f * numHides));
+			}
+			else {
+				if(numHides > 0)
+					GaugeDecay (warmth, warmthDecay / 2);
+				else
+					GaugeDecay (warmth, warmthDecay);
+			}
 
-		GaugeDecay (hunger, hungerDecay);
-		GaugeDecay (thirst, thirstDecay);
-		
-		int numHides = Config.inventory.InstancesOf (GameItem.Hide);
-		if (Config.inventory.GetNearFire()) {
-			warmth.value += Time.deltaTime * (0.08f + (0.5f * numHides));
-		}
-		else {
-			if(numHides > 0)
-				GaugeDecay (warmth, warmthDecay / 2);
-			else
-				GaugeDecay (warmth, warmthDecay);
-		}
+			GaugeBlink (hunger);
+			GaugeBlink (thirst);
+			GaugeBlink (warmth);
 
-		GaugeBlink (hunger);
-		GaugeBlink (thirst);
-		GaugeBlink (warmth);
+			if(hunger.value <= 0) GSM.SwitchToLose();
+			if(thirst.value <= 0) GSM.SwitchToLose();
+			if(warmth.value <= 0) GSM.SwitchToLose();
+		}
 	}
 
 	void GaugeDecay(Slider s, float decay){
