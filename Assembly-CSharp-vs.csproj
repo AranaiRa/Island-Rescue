@@ -54,7 +54,6 @@
      <Compile Include="Assets\Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\Collector.cs" />
      <Compile Include="Assets\Scripts\Config.cs" />
-     <Compile Include="Assets\Scripts\ConstructionManager.cs" />
      <Compile Include="Assets\Scripts\ConstructionSite.cs" />
      <Compile Include="Assets\Scripts\CraftPreview.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
@@ -65,9 +64,7 @@
      <Compile Include="Assets\Scripts\ItemSelector.cs" />
      <Compile Include="Assets\Scripts\LightFlicker.cs" />
      <Compile Include="Assets\Scripts\NeedsManager.cs" />
-     <Compile Include="Assets\Scripts\Pathfinder.cs" />
      <Compile Include="Assets\Scripts\PathingNode.cs" />
-     <Compile Include="Assets\Scripts\RaycastLookAt.cs" />
      <Compile Include="Assets\Scripts\ResourceManager.cs" />
      <Compile Include="Assets\Scripts\ResourceNode.cs" />
      <Compile Include="Assets\Scripts\Stockpile.cs" />
